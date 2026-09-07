@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main(void)
+{
+    int x, y, z;
+    char op[4];
+    scanf("%d %d %d", &x, &y, &z);
+    scanf("%s", op);
+
+    // a最小，b中间，c最大
+    int a, b, c;
+    // 简单三数排序
+    int t;
+    if(x > y) { t = x; x = y; y = t; }
+    if(x > z) { t = x; x = z; z = t; }
+    if(y > z) { t = y; y = z; z = t; }
+    a = x;  // A
+    b = y;  // B
+    c = z;  // C
+
+    // 按op[0],op[1],op[2]输出
+    for(int i = 0; i < 3; i++)
+    {
+        int num;
+        if(op[i] == 'A') num = a;
+        else if(op[i] == 'B') num = b;
+        else num = c;
+        if(i > 0) printf(" ");
+        printf("%d", num);
+    }
+    return 0;
+}
