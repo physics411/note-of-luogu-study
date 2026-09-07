@@ -1,0 +1,40 @@
+#include <stdio.h>
+int main(void)
+{
+    char isbn[20];
+    scanf("%s", isbn);
+    int sum = 0;
+    // pos记录是第几个数字(1~9)，跳过'-'
+    int pos = 1;
+    for(int i = 0; i < 12; i++)
+    {
+        if(isbn[i] == '-') continue;
+        // 前9位数字参与计算
+        if(pos <=9)
+        {
+            int digit = isbn[i] - '0';
+            sum += digit * pos;
+            pos++;
+        }
+    }
+    int mod = sum % 11;
+    char right_last;
+    if(mod == 10)
+        right_last = 'X';
+    else
+        right_last = mod + '0';
+
+    // isbn[12] 就是输入的最后一位校验码
+    if(isbn[12] == right_last)
+    {
+        printf("Right");
+    }
+    else
+    {
+        //输出前12个字符，再输出正确最后一位
+        for(int i=0;i<12;i++)
+            putchar(isbn[i]);
+        putchar(right_last);
+    }
+    return 0;
+}
